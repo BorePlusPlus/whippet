@@ -3,3 +3,6 @@ lint:
 
 format:
 	poetry run black .
+
+test:
+	poetry run pytest

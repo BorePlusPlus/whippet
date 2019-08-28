@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "whippet"
+version = "0.1.0"
+description = ""
+authors = ["Dalibor Novak <BorePlusPlus@gmail.com>"]
+
+[tool.poetry.scripts]
+whippet = "whippet:console.run"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+black = {version = "^18.3-alpha.0", allows-prereleases = true}
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

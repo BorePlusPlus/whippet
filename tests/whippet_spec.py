@@ -35,7 +35,9 @@ def it_creates_hooks_dir_when_needed(tmp_path: Path) -> None:
         assert hook_path.is_file()
 
 
-def it_skips_installation_when_no_git_dir(tmp_path: Path, capsys: CaptureFixture) -> None:
+def it_skips_installation_when_no_git_dir(
+    tmp_path: Path, capsys: CaptureFixture
+) -> None:
     whippet.install_hooks(tmp_path)
     captured = capsys.readouterr()
     hooks_dir = tmp_path / ".git" / "hooks"

@@ -1,9 +1,9 @@
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
 
 from whippet import __version__
 
-hook_list = [
+hook_list: List[str] = [
     "applypatch-msg",
     "pre-applypatch",
     "post-applypatch",
@@ -53,13 +53,12 @@ def install_hooks(cwd: Path) -> None:
         print("whippet - Can not find .git directory, skipping hooks installation.")
         return
 
-    with open(Path(__file__).parent / "hook_template") as ht:
-        template = ht.read()
+    template_path = Path(__file__).parent / "hook_template"
+    template = template_path.read_text(encoding="utf-8")
 
     for hook_name in hook_list:
         hook_file = hooks_dir / hook_name
         # if hook_file.exists():
         #     print(f"{hook_name} hook script already exists - ")
         hook = template.format(version=__version__, hook=hook_name)
-        with open(hook_file, "w") as hf:
-            hf.write(hook)
+        hook_file.write_text(hook, encoding="utf-8")

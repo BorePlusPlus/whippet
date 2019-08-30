@@ -58,7 +58,10 @@ def install_hooks(cwd: Path) -> None:
 
     for hook_name in hook_list:
         hook_file = hooks_dir / hook_name
-        # if hook_file.exists():
-        #     print(f"{hook_name} hook script already exists - ")
+
+        if hook_file.exists():
+            print(f"whippet - {hook_name} hook script already exists - skipping")
+            continue
+
         hook = template.format(version=__version__, hook=hook_name)
         hook_file.write_text(hook, encoding="utf-8")

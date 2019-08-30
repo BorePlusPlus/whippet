@@ -1,0 +1,17 @@
+#!/bin/bash
+# whippet {version}
+
+command -v make >/dev/null 2>&1 || {{
+  echo >&2 "whippet - Can not find make in PATH. Skipping {hook} hook."
+  exit 0
+}}
+
+if make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {{split($1,A,/ /);for(i in A)print A[i]}}' | grep ^{hook}$
+then
+  make {hook} || {{
+    echo
+    echo "whippet - {hook} hook failed (add --no-verify to bypass)"
+    echo "whippet - To debug, run 'make {hook}'"
+    exit 1
+  }}
+fi

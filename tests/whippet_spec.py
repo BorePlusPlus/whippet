@@ -46,8 +46,18 @@ def it_skips_installation_when_no_git_dir(
     assert not hooks_dir.exists()
 
 
-def it_installs_hooks_in_git_dir_in_ancestor_dir():
-    pass
+def it_installs_hooks_in_git_dir_in_ancestor_dir(tmp_path: Path) -> None:
+    hooks_dir = tmp_path / ".git" / "hooks"
+    hooks_dir.mkdir(parents=True)
+    cwd = tmp_path / "foo" / "bar"
+    cwd.mkdir(parents=True)
+
+    whippet.install_hooks(cwd)
+
+    for hook in whippet.hook_list:
+        hook_path = hooks_dir / hook
+        assert hook_path.exists()
+        assert hook_path.is_file()
 
 
 def it_does_not_overwrite_existing_hooks(

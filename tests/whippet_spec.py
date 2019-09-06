@@ -9,16 +9,25 @@ def it_exposes_version():
     assert __version__ == "0.1.0"
 
 
-def it_installs_hooks(tmp_path: Path) -> None:
-    hooks_dir = tmp_path / ".git" / "hooks"
+def make_hooks_dir(path: Path) -> Path:
+    hooks_dir = path / ".git" / "hooks"
     hooks_dir.mkdir(parents=True)
+    return hooks_dir
 
-    whippet.install_hooks(tmp_path)
 
+def assert_hooks_created(hooks_dir: Path) -> None:
     for hook in whippet.hook_list:
         hook_path = hooks_dir / hook
         assert hook_path.exists()
         assert hook_path.is_file()
+
+
+def it_installs_hooks(tmp_path: Path) -> None:
+    hooks_dir = make_hooks_dir(tmp_path)
+
+    whippet.install_hooks(tmp_path)
+
+    assert_hooks_created(hooks_dir)
 
 
 def it_creates_hooks_dir_when_needed(tmp_path: Path) -> None:
@@ -29,10 +38,7 @@ def it_creates_hooks_dir_when_needed(tmp_path: Path) -> None:
 
     whippet.install_hooks(tmp_path)
 
-    for hook in whippet.hook_list:
-        hook_path = hooks_dir / hook
-        assert hook_path.exists()
-        assert hook_path.is_file()
+    assert_hooks_created(hooks_dir)
 
 
 def it_skips_installation_when_no_git_dir(
@@ -47,24 +53,19 @@ def it_skips_installation_when_no_git_dir(
 
 
 def it_installs_hooks_in_git_dir_in_ancestor_dir(tmp_path: Path) -> None:
-    hooks_dir = tmp_path / ".git" / "hooks"
-    hooks_dir.mkdir(parents=True)
+    hooks_dir = make_hooks_dir(tmp_path)
     cwd = tmp_path / "foo" / "bar"
     cwd.mkdir(parents=True)
 
     whippet.install_hooks(cwd)
 
-    for hook in whippet.hook_list:
-        hook_path = hooks_dir / hook
-        assert hook_path.exists()
-        assert hook_path.is_file()
+    assert_hooks_created(hooks_dir)
 
 
 def it_does_not_overwrite_existing_hooks(
     tmp_path: Path, capsys: CaptureFixture
 ) -> None:
-    hooks_dir = tmp_path / ".git" / "hooks"
-    hooks_dir.mkdir(parents=True)
+    hooks_dir = make_hooks_dir(tmp_path)
 
     custom_hook = "Captain"
     custom_hook_path = hooks_dir / "pre-commit"
@@ -76,7 +77,4 @@ def it_does_not_overwrite_existing_hooks(
     assert "pre-commit hook script already exists - skipping" in captured.out
     assert custom_hook_path.read_text(encoding="utf-8") == custom_hook
 
-    for hook in whippet.hook_list:
-        hook_path = hooks_dir / hook
-        assert hook_path.exists()
-        assert hook_path.is_file()
+    assert_hooks_created(hooks_dir)

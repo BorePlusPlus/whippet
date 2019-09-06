@@ -2,24 +2,12 @@ from pathlib import Path
 
 from _pytest.capture import CaptureFixture
 
+from tests import make_hooks_dir, assert_hooks_created
 from whippet import __version__, whippet
 
 
 def it_exposes_version():
     assert __version__ == "0.1.0"
-
-
-def make_hooks_dir(path: Path) -> Path:
-    hooks_dir = path / ".git" / "hooks"
-    hooks_dir.mkdir(parents=True)
-    return hooks_dir
-
-
-def assert_hooks_created(hooks_dir: Path) -> None:
-    for hook in whippet.hook_list:
-        hook_path = hooks_dir / hook
-        assert hook_path.exists()
-        assert hook_path.is_file()
 
 
 def it_installs_hooks(tmp_path: Path) -> None:

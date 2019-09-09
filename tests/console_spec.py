@@ -1,6 +1,8 @@
 import builtins
 from pathlib import Path
+from typing import List
 
+import pytest
 from _pytest.capture import CaptureFixture
 from _pytest.monkeypatch import MonkeyPatch
 
@@ -71,5 +73,20 @@ def it_keeps_prompting_until_given_acceptable_answer(
     monkeypatch.setattr(Path, "cwd", lambda: tmp_path)
 
     console.run()
+
+    assert_hooks_created(hooks_dir)
+
+
+@pytest.mark.parametrize(
+    "cli_args", [["-y"], ["--yes"], ["--assume-yes"]], ids=("y", "yes", "assume-yes")
+)
+def it_supports_assume_yes(
+    tmp_path: Path, monkeypatch: MonkeyPatch, cli_args: List[str]
+) -> None:
+    hooks_dir = make_hooks_dir(tmp_path)
+
+    monkeypatch.setattr(Path, "cwd", lambda: tmp_path)
+
+    console.run(cli_args)
 
     assert_hooks_created(hooks_dir)

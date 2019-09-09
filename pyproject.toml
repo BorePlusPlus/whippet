@@ -5,7 +5,7 @@ description = ""
 authors = ["Dalibor Novak <BorePlusPlus@gmail.com>"]
 
 [tool.poetry.scripts]
-whippet = "whippet:console.run"
+whippet = "whippet:console.main"
 
 [tool.poetry.dependencies]
 python = "^3.6"

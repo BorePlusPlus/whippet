@@ -3,6 +3,7 @@ name = "whippet"
 version = "0.2.3"
 description = "Install make based hooks with ease."
 readme = "README.rst"
+license = "MIT"
 homepage = "https://github.com/BorePlusPlus/whippet"
 authors = ["Dalibor Novak <BorePlusPlus@gmail.com>"]
 

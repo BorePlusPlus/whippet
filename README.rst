@@ -14,7 +14,7 @@ Whippet is available as a `PyPI package <https://pypi.org/project/whippet/>`_. U
 
 .. code-block:: bash
 
-    $ pip install requests
+    $ pip install whippet
 
 Usage
 *****

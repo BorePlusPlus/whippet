@@ -7,7 +7,7 @@ from whippet import __version__, whippet
 
 
 def it_exposes_version():
-    assert __version__ == "0.1.0"
+    assert __version__ == "0.2.2"
 
 
 def it_installs_hooks(tmp_path: Path) -> None:
@@ -64,5 +64,18 @@ def it_does_not_overwrite_existing_hooks(
 
     assert "pre-commit hook script already exists - skipping" in captured.out
     assert custom_hook_path.read_text(encoding="utf-8") == custom_hook
+
+    assert_hooks_created(hooks_dir)
+
+
+def it_overwrites_own_hooks(tmp_path: Path) -> None:
+    hooks_dir = make_hooks_dir(tmp_path)
+
+    existing_hook = "# whippet\nCaptain"
+    existing_hook_path = hooks_dir / "pre-commit"
+    existing_hook_path.write_text(existing_hook, encoding="utf-8")
+
+    whippet.install_hooks(tmp_path)
+    assert existing_hook_path.read_text(encoding="utf-8") != existing_hook
 
     assert_hooks_created(hooks_dir)

@@ -3,6 +3,7 @@ name = "whippet"
 version = "0.2.0"
 description = "Install make based hooks with ease."
 readme = "README.rst"
+homepage = "https://github.com/BorePlusPlus/whippet"
 authors = ["Dalibor Novak <BorePlusPlus@gmail.com>"]
 
 [tool.poetry.scripts]

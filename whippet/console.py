@@ -1,3 +1,4 @@
+import sys
 from argparse import ArgumentParser
 from typing import List, Optional
 
@@ -48,4 +49,4 @@ def run(cli_args: Optional[List[str]] = None) -> None:
 
 
 def main() -> None:
-    run([])
+    run(sys.argv[1:])

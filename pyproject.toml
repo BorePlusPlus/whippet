@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "whippet"
-version = "0.2.2"
+version = "0.2.3"
 description = "Install make based hooks with ease."
 readme = "README.rst"
 homepage = "https://github.com/BorePlusPlus/whippet"

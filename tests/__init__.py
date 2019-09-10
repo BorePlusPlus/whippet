@@ -1,3 +1,4 @@
+import stat
 from pathlib import Path
 
 from whippet import whippet
@@ -14,6 +15,7 @@ def assert_hooks_created(hooks_dir: Path) -> None:
         hook_path = hooks_dir / hook
         assert hook_path.exists()
         assert hook_path.is_file()
+        assert stat.S_IMODE(hook_path.stat().st_mode) == 0o775
 
 
 def assert_hooks_not_created(hooks_dir: Path) -> None:

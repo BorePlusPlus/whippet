@@ -58,6 +58,7 @@ def it_does_not_overwrite_existing_hooks(
     custom_hook = "Captain"
     custom_hook_path = hooks_dir / "pre-commit"
     custom_hook_path.write_text(custom_hook, encoding="utf-8")
+    custom_hook_path.chmod(0o775)
 
     whippet.install_hooks(tmp_path)
     captured = capsys.readouterr()

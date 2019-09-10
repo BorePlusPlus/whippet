@@ -73,3 +73,4 @@ def install_hooks(cwd: Path) -> None:
 
         hook = template.format(version=__version__, hook=hook_name)
         hook_file.write_text(hook, encoding="utf-8")
+        hook_file.chmod(0o775)

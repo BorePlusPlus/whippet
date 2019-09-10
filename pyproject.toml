@@ -1,7 +1,8 @@
 [tool.poetry]
 name = "whippet"
 version = "0.1.0"
-description = ""
+description = "Install make based hooks with ease."
+readme = "README.rst"
 authors = ["Dalibor Novak <BorePlusPlus@gmail.com>"]
 
 [tool.poetry.scripts]

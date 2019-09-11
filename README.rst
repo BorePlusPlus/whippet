@@ -21,7 +21,7 @@ Usage
 
 Install hooks
 -------------
-Once whippet is installed, it is used by invoking ``whippet`` executable in the directory where you wish to install hooks. Whippet checks if that directory (or its ancestor) contains a ``.git`` directory and offer to install hooks into it.
+Once whippet is installed, it is used by invoking ``whippet`` executable in the directory where you wish to install hooks. Whippet checks if that directory (or its ancestor) contains a ``.git`` directory and offers to install hooks into it.
 
 .. code-block:: bash
 
@@ -43,7 +43,7 @@ Then the target will be executed on ``pre-commit``:
 
 .. code-block:: bash
 
-    $ git ci -m 'Testing whippet'
+    $ git commit -m 'Testing whippet'
     pre-commit
     Whippet says: Woof!
     [master d654d33] Bar

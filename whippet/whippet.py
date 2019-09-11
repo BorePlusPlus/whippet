@@ -68,9 +68,25 @@ def install_hooks(cwd: Path) -> None:
         hook_file = hooks_dir / hook_name
 
         if hook_file.exists() and not is_whippet_hook(hook_file):
-            print(f"whippet - {hook_name} hook script already exists - skipping")
+            print(f"whippet - {hook_name} hook script already exists - skipping.")
             continue
 
         hook = template.format(version=__version__, hook=hook_name)
         hook_file.write_text(hook, encoding="utf-8")
         hook_file.chmod(0o775)
+
+
+def uninstall_hooks(cwd: Path) -> None:
+    hooks_dir = get_hooks_dir(cwd)
+    if hooks_dir is None:
+        print("whippet - Can not find .git directory, skipping hooks uninstallation.")
+        return
+
+    for hook_name in hook_list:
+        hook_file = hooks_dir / hook_name
+
+        if hook_file.exists():
+            if is_whippet_hook(hook_file):
+                hook_file.unlink()
+            else:
+                print(f"whippet - {hook_name} hook not created by whippet - skipping.")

@@ -6,7 +6,7 @@ import pytest
 from _pytest.capture import CaptureFixture
 from _pytest.monkeypatch import MonkeyPatch
 
-from tests import make_hooks_dir, assert_hooks_created, assert_hooks_not_created
+from tests import make_hooks_dir, assert_hooks_created, assert_no_hooks
 from whippet import console
 
 
@@ -55,7 +55,7 @@ def it_aborts_installation_on_negative_prompt(
 
     console.run()
 
-    assert_hooks_not_created(hooks_dir)
+    assert_no_hooks(hooks_dir)
 
 
 def it_keeps_prompting_until_given_acceptable_answer(

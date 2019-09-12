@@ -11,7 +11,10 @@ format:
 test:
 	poetry run pytest
 
+dev:
+	poetry run ptw
+
 pre-commit: lint test
 
 
-.PHONY: init lint format test pre-commit
+.PHONY: init lint format test dev pre-commit

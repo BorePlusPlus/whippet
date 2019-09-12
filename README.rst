@@ -8,6 +8,10 @@ I liked the simplicity of setting up git hooks using husky, and since I failed t
 
 As far as I know, there is no standard equivalent to `npm scripts <https://docs.npmjs.com/misc/scripts>`_ in python, so I chose to rely on make which seems to be a popular way to organise project-related tasks in the python world.
 
+Note
+----
+Development follows my needs at work, which means whippet might be a bit light on features. Feel free to make a suggestion if you're missing something.
+
 Installation
 ************
 Whippet is available as a `PyPI package <https://pypi.org/project/whippet/>`_. Use a tool that can install packages from it, like for instance `pip <https://pip.pypa.io/en/stable/>`_.
@@ -52,6 +56,16 @@ Then the target will be executed on ``pre-commit``:
     $
 
 
+Uninstall hooks
+---------------
+If you had enough and want to remove whippet git hooks invoke ``whippet`` and pass ``uninstall`` command
+
+.. code-block:: bash
+
+    $ whippet uninstall
+    whippet - Are you sure you want to uninstall hooks in /home/bpp/demo/.git? [Y/n] y
+
+
 Non-interactive
 ---------------
 To avoid the prompt pass the ``--assume-yes`` argument to whippet. This can be useful when adding whippet to initialisation target in Makefile. Example:
@@ -61,5 +75,3 @@ To avoid the prompt pass the ``--assume-yes`` argument to whippet. This can be u
     init:
         poetry install
         whippet --assume-yes
-
-

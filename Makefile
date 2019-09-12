@@ -4,6 +4,7 @@ init:
 
 lint:
 	poetry run black --check .
+	poetry run mypy -p whippet
 
 format:
 	poetry run black .

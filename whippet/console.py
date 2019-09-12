@@ -1,7 +1,7 @@
 import sys
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 from whippet import whippet
 
@@ -17,7 +17,7 @@ def prompt(action: str, git_dir: Path) -> bool:
             return True
 
 
-def get_dirs() -> Tuple[Path, Path]:
+def get_dirs() -> Tuple[Path, Optional[Path]]:
     cwd = Path.cwd()
     git_dir = whippet.resolve_git_dir(cwd)
     return cwd, git_dir

@@ -92,9 +92,7 @@ def it_unistalls_hooks(tmp_path: Path) -> None:
     assert_no_hooks(hooks_dir)
 
 
-def it_does_not_remove_custom_hooks(
-    tmp_path: Path, capsys: CaptureFixture
-) -> None:
+def it_does_not_remove_custom_hooks(tmp_path: Path, capsys: CaptureFixture) -> None:
     hooks_dir = make_hooks_dir(tmp_path)
 
     custom_hook = "Captain"
@@ -108,6 +106,7 @@ def it_does_not_remove_custom_hooks(
     captured = capsys.readouterr()
     assert "pre-commit hook not created by whippet - skipping" in captured.out
     assert custom_hook_path.read_text(encoding="utf-8") == custom_hook
+
 
 def it_skips_uninstallation_when_no_git_dir(
     tmp_path: Path, capsys: CaptureFixture

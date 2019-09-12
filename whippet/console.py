@@ -1,15 +1,15 @@
 import sys
-from argparse import ArgumentParser
-from typing import List, Optional
+from argparse import ArgumentParser, Namespace
+from pathlib import Path
+from typing import List, Tuple
 
 from whippet import whippet
-from pathlib import Path
 
 
-def install_prompt(git_dir: Path) -> bool:
+def prompt(action: str, git_dir: Path) -> bool:
     while True:
         answer = input(
-            f"whippet - Are you sure you want to install hooks in {git_dir}? [Y/n] "
+            f"whippet - Are you sure you want to {action} hooks in {git_dir}? [Y/n] "
         ).lower()
         if answer == "n":
             return False
@@ -17,9 +17,22 @@ def install_prompt(git_dir: Path) -> bool:
             return True
 
 
+def get_dirs() -> Tuple[Path, Path]:
+    cwd = Path.cwd()
+    git_dir = whippet.resolve_git_dir(cwd)
+    return cwd, git_dir
+
+
 def make_parser() -> ArgumentParser:
     parser = ArgumentParser(
-        prog="whippet", description="Install make based hooks with ease."
+        prog="whippet", description="Install make based git hooks with ease."
+    )
+    parser.add_argument(
+        "command",
+        choices=["install", "uninstall"],
+        default="install",
+        nargs="?",
+        help="Install or uninstall whippet managed git hooks.",
     )
     parser.add_argument(
         "-y",
@@ -31,21 +44,38 @@ def make_parser() -> ArgumentParser:
     return parser
 
 
-def run(cli_args: Optional[List[str]] = None) -> None:
-    cwd = Path.cwd()
-    git_dir = whippet.resolve_git_dir(cwd)
+def install(args: Namespace) -> None:
+    cwd, git_dir = get_dirs()
 
     if git_dir is None:
         print("whippet - Can not find .git directory, skipping hooks installation.")
         return
 
-    args = make_parser().parse_args(args=cli_args)
-
-    if not (args.yes or install_prompt(git_dir)):
+    if not (args.yes or prompt("install", git_dir)):
         print("whippet - Aborted.")
         return
 
     whippet.install_hooks(cwd)
+
+
+def uninstall(args: Namespace) -> None:
+    cwd, git_dir = get_dirs()
+
+    if git_dir is None:
+        print("whippet - Can not find .git directory, skipping hooks uninstallation.")
+        return
+
+    if not (args.yes or prompt("uninstall", git_dir)):
+        print("whippet - Aborted.")
+        return
+
+    whippet.uninstall_hooks(cwd)
+
+
+def run(cli_args: List[str]) -> None:
+    args = make_parser().parse_args(args=cli_args)
+
+    globals()[args.command](args)
 
 
 def main() -> None:

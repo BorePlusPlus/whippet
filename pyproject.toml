@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "whippet"
-version = "0.2.4"
+version = "0.3.0"
 description = "Install make based git hooks with ease."
 readme = "README.rst"
 license = "MIT"

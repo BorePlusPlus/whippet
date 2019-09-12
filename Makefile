@@ -1,3 +1,7 @@
+init:
+	poetry install
+	poetry run whippet -y
+
 lint:
 	poetry run black --check .
 
@@ -6,3 +10,8 @@ format:
 
 test:
 	poetry run pytest
+
+pre-commit: lint test
+
+
+.PHONY: init lint format test pre-commit

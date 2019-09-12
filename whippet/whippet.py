@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Optional, List
 
-from whippet import __version__
+__version__: str = "0.3.0"
 
 hook_list: List[str] = [
     "applypatch-msg",

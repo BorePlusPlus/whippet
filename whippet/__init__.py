@@ -1,1 +1,2 @@
-__version__: str = "0.3.0"
+from whippet import console
+from whippet.whippet import __version__

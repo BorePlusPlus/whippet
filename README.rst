@@ -4,7 +4,7 @@ Use `make <https://www.gnu.org/software/make/>`_ targets to execute git hooks. I
 
 Rationale
 *********
-I liked the simplicity of setting up git hooks using husky, and since I failed to find a similar tool in python ecosystem, I decided to write one myself.
+When working on `Node.js <https://nodejs.org>`_ projects, I liked the simplicity of setting up git hooks using husky. Since I failed to find a similar tool in python ecosystem, I decided to write one myself.
 
 As far as I know, there is no standard equivalent to `npm scripts <https://docs.npmjs.com/misc/scripts>`_ in python, so I chose to rely on make which seems to be a popular way to organise project-related tasks in the python world.
 

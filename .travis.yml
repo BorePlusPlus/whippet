@@ -16,3 +16,4 @@ deploy:
     script: poetry publish --build --username="$PYPI_USERNAME" --password="$PYPI_PASSWORD"
     on:
       tags: true
+      python: "3.6"

@@ -2,6 +2,19 @@ Whippet - like husky, but leaner
 ################################
 Use `make <https://www.gnu.org/software/make/>`_ targets to execute git hooks. Inspired by `husky <https://github.com/typicode/husky#readme>`_.
 
+.. image:: https://travis-ci.org/BorePlusPlus/whippet.svg?branch=master
+    :target: https://travis-ci.org/BorePlusPlus/whippet
+    :alt: Automatic build
+
+.. image:: https://img.shields.io/pypi/v/whippet
+    :target: https://pypi.org/project/whippet/
+    :alt: PyPI version
+
+.. image:: https://img.shields.io/pypi/dw/whippet
+    :target: https://pypi.org/project/whippet/
+    :alt: PyPI downloads
+
+
 Rationale
 *********
 When working on `Node.js <https://nodejs.org>`_ projects, I liked the simplicity of setting up git hooks using husky. Since I failed to find a similar tool in python ecosystem, I decided to write one myself.

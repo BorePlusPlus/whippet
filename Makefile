@@ -1,5 +1,7 @@
-init:
+install:
 	poetry install
+
+init: install
 	poetry run whippet -y
 
 lint:
@@ -15,7 +17,11 @@ test:
 dev:
 	poetry run ptw
 
-pre-commit: lint test
+check: lint test
+
+pre-commit: check
+
+ci: check
 
 
-.PHONY: init lint format test dev pre-commit
+.PHONY: install init lint format test dev check pre-commit ci

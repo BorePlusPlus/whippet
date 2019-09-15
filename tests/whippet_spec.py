@@ -72,7 +72,7 @@ def it_does_not_overwrite_existing_hooks(
 def it_overwrites_own_hooks(tmp_path: Path) -> None:
     hooks_dir = make_hooks_dir(tmp_path)
 
-    existing_hook = "# whippet\nCaptain"
+    existing_hook = "# whippet 1.2.4\nCaptain"
     existing_hook_path = hooks_dir / "pre-commit"
     existing_hook_path.write_text(existing_hook, encoding="utf-8")
 

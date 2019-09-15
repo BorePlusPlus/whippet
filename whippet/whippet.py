@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 from typing import Optional, List
 
@@ -50,7 +51,7 @@ def get_hooks_dir(cwd: Path) -> Optional[Path]:
 def is_whippet_hook(path: Path) -> bool:
     with path.open(encoding="utf-8") as f:
         for line in f:
-            if "# whippet" in line:
+            if re.fullmatch(r"# whippet \d+\.\d+\.\d+", line.rstrip()):
                 return True
         return False
 

@@ -7,7 +7,7 @@ from whippet import __version__, whippet
 
 
 def it_exposes_version():
-    assert __version__ == "0.3.1"
+    assert __version__ == "0.3.2"
 
 
 def it_installs_hooks(tmp_path: Path) -> None:

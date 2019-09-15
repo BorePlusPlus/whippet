@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 from typing import Optional, List
 
-__version__: str = "0.3.1"
+__version__: str = "0.3.2"
 
 hook_list: List[str] = [
     "applypatch-msg",

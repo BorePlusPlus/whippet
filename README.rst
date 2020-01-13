@@ -86,5 +86,5 @@ To avoid the prompt pass the ``--assume-yes`` argument to whippet. This can be u
 .. code-block:: make
 
     init:
-        poetry install
+        pip install -r requirements.txt
         whippet --assume-yes
